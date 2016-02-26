@@ -43,4 +43,12 @@ public class ClientTest {
     Client savedClient = Client.find(myClient.getId());
     assertTrue(myClient.equals(savedClient));
   }
+
+  @Test
+  public void update_updatesChangeNameOfClientsInDatabase() {
+    Client myClient = new Client("Client1");
+    myClient.save();
+    myClient.update("Client2");
+    assertEquals("Client2", Client.find(myClient.getId()).getName());
+  }
 }
