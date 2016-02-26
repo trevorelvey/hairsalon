@@ -23,12 +23,13 @@ public class Client {
       return false;
     } else {
       Client newClient = (Client) otherClient;
-      return this.getName().equals(newClient.getName());
+      return this.getName().equals(newClient.getName()) &&
+        this.getId() == newClient.getId();
     }
   }
 
   public static List<Client> all() {
-    String sql = "Select id, name FROM clients";
+    String sql = "SELECT id, name FROM clients";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Client.class);
     }
@@ -37,9 +38,10 @@ public class Client {
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO clients (name) VALUES (:name)";
-      con.createQuery(sql)
+      this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
-        .executeUpdate();
+        .executeUpdate()
+        .getKey();
     }
   }
 }
