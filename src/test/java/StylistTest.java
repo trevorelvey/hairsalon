@@ -60,4 +60,22 @@ public class StylistTest {
     firstStylist.delete();
     assertEquals(1, Stylist.all().size());
   }
+
+  @Test
+  public void getClients_returnsAllClientsWithSameStylist() {
+    Stylist myStylist = new Stylist("Stylist1");
+    myStylist.save();
+
+    Client firstClient = new Client("Client1");
+    Client secondClient = new Client("Client2");
+    firstClient.save();
+    secondClient.save();
+
+    firstClient.assignStylist(myStylist.getId());
+    secondClient.assignStylist(myStylist.getId());
+
+    Client[] clients = new Client[] {firstClient, secondClient};
+    assertTrue(myStylist.getClients()
+                        .containsAll(Arrays.asList(clients)));
+  }
 }
