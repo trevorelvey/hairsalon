@@ -11,6 +11,6 @@ public class ClientTest {
 
   @Test
   public void all_emptyAtFirst(){
-    assertEquals(Task.all().size(), 0);
+    assertEquals(Client.all().size(), 0);
   }
 }

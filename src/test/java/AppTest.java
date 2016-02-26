@@ -16,8 +16,8 @@ public class AppTest extends FluentTest {
       return webDriver;
   }
 
-  @ClassRule
-  public static ServerRule server = new ServerRule();
+  // @ClassRule
+  // public static ServerRule server = new ServerRule();
 
   // @Test
   // public void rootTest() {
