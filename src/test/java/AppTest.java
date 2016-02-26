@@ -54,4 +54,30 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Stylist2");
   }
 
+  @Test
+  public void clientRemoved() {
+    Stylist myStylist = new Stylist("Stylist1");
+    myStylist.save();
+    Client myClient = new Client("Client1");
+    myClient.save();
+    myClient.assignStylist(myStylist.getId());
+    goTo("http://localhost:4567/" + Integer.toString(myStylist.getId()));
+    click("option", withText("Client1"));
+    submit(".delete-client");
+    assertThat(!(pageSource()).contains("Client1"));
+  }
+
+  @Test
+  public void clientUpdated() {
+    Stylist myStylist = new Stylist("Stylist1");
+    myStylist.save();
+    Client myClient = new Client("Client1");
+    myClient.save();
+    myClient.assignStylist(myStylist.getId());
+    goTo("http://localhost:4567/" + Integer.toString(myStylist.getId()));
+    click("option", withText("Client1"));
+    fill("#newName-client").with("Client2");
+    submit(".update-client");
+    assertThat(pageSource()).contains("Client2");
+  }
 }
