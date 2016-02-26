@@ -51,4 +51,13 @@ public class ClientTest {
     myClient.update("Client2");
     assertEquals("Client2", Client.find(myClient.getId()).getName());
   }
+
+  public void delete_deletesClientFromDatabase() {
+    Client firstClient = new Client("Client1");
+    Client secondClient = new Client("Client2");
+    firstClient.save();
+    secondClient.save();
+    firstClient.delete();
+    assertEquals(1, Client.all().size());
+  }
 }
