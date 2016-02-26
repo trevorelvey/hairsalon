@@ -4,6 +4,7 @@ import org.sql2o.*;
 public class Client {
   private int id;
   private String name;
+  private int stylist_id;
 
   public int getId() {
     return id;
@@ -15,6 +16,11 @@ public class Client {
 
   public Client(String name) {
     this.name = name;
+  }
+
+
+  public int getStylistId() {
+    return stylist_id;
   }
 
   @Override
@@ -29,7 +35,7 @@ public class Client {
   }
 
   public static List<Client> all() {
-    String sql = "SELECT id, name FROM clients";
+    String sql = "SELECT id, name, stylist_id FROM clients";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Client.class);
     }
@@ -73,5 +79,20 @@ public class Client {
          .addParameter("id", this.id)
          .executeUpdate();
     }
+  }
+
+  public void assignStylist(int stylist_id) {
+    stylist_id = stylist_id;
+    String sql = "UPDATE clients SET stylist_id = :stylist_id WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+         .addParameter("stylist_id", stylist_id)
+         .addParameter("id", this.id)
+         .executeUpdate();
+    }
+  }
+
+  public String getStylistName() {
+    return Stylist.find(stylist_id).getName();
   }
 }

@@ -60,4 +60,14 @@ public class ClientTest {
     firstClient.delete();
     assertEquals(1, Client.all().size());
   }
+
+  @Test
+  public void getStylistName_matchesStylistNameWithStylistIdOfClients() {
+    Client myClient = new Client("Client1");
+    Stylist myStylist = new Stylist("Stylist1");
+    myClient.save();
+    myStylist.save();
+    myClient.assignStylist(myStylist.getId());
+    assertEquals("Stylist1", Client.find(myClient.getId()).getStylistName());
+  }
 }
