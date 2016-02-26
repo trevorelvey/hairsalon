@@ -1,20 +1,44 @@
-<h2>Hair Salon</h2>
+<div class="container">
+<h2>Stylists</h2>
 
-  <div class="row">
-    <h4>Stylists</h4>
-    <p>Click name for clients.</p>
-      #foreach ($stylist in $stylists)
-      <form action="/delete/stylist/$stylist.getId()" method="post">
-        <a href="/stylists/$stylist.getId()">$stylist.getStylist()</a>
-        <button type="submit" id="$stylist.getId()" name="deleteStylist" class="deleteButton btn btn-default">
-        x</button>
-      </form>
+#foreach($stylist in $stylists)
+    <h4><a href="/$stylist.getId()">$stylist.getName()</a></h4>
+#end
+
+
+  <h4>Add A Stylist</h4>
+  <form action="/new-stylist" method="post">
+    <input id="name-stylist" name="name-stylist" type="text">
+    <br>
+    <button type="submit" class="btn btn-default new-stylist">Add</button>
+  </form>
+  <br><br>
+
+  <h4>Remove A Stylist</h4>
+  <form action="/delete-stylist" method="post">
+    <select id="id-stylist" name="id-stylist" type="text">
+      #foreach($stylist in $stylists)
+      <option value="$stylist.getId()">$stylist.getName()</option>
       #end
-      <br><br>
-      <form action="/" method="post">
-        <label for="stylist">Add a stylist:</label><br>
-        <input id="stylist" type="text" name="stylist">
-        <button id="stylistCreate" type="submit" class="btn btn-default">Add</button>
-      </form>
-    </div>
-  </div>
+    </select>
+    <br><br>
+    <button type="submit" class="btn btn-default delete-stylist">Remove</button>
+  </form>
+  <br><br>
+
+  <h4>Update A Stylist</h4>
+  <form action="/update-stylist" method="post">
+    <select id="id-stylist" name="id-stylist" type="text">
+      #foreach($stylist in $stylists)
+      <option value="$stylist.getId()">$stylist.getName()</option>
+      #end
+    </select>
+    <br><br>
+    <label for="newName-stylist">Update Name</label>
+    <input id="newName-stylist" name="newName-stylist" type="text">
+    <br>
+    <br>
+    <button type="submit" class="btn btn-default update-stylist">Update</button>
+  </form>
+
+</div>

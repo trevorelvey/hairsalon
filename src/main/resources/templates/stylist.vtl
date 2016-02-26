@@ -1,0 +1,53 @@
+<div class="container">
+<h2>$stylist.getName()</h2>
+
+
+    <ul>
+      #foreach($client in $stylist.getClients())
+        <li>$client.getName()</li>
+      #end
+    </ul>
+
+    <h4>Add a New Client</h4>
+    <form action="/$stylist.getId()/new-client" method="post">
+      <input id="name-client" name="name-client" type="text" required>
+      <br>
+      <label for="id-stylist">Select a Stylist</label>
+      <select id="id-stylist" name="id-stylist" type="text">
+        <option value="$stylist.getId()">$stylist.getName()</option>
+      </select>
+      <br><br>
+      <button type="submit" class="btn btn-default new-client">Submit</button>
+    </form>
+    <br><br>
+
+    <h4>Remove a Client</h4>
+    <form action="/$stylist.getId()/delete-client" method="post">
+      <select id="id-client" name="id-client" type="text">
+        #foreach($client in $stylist.getClients())
+        <option value="$client.getId()">$client.getName()</option>
+        #end
+      </select>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-default delete-client">Submit</button>
+    </form>
+    <br><br>
+
+    <h4>Update a client</h4>
+    <form action="/$stylist.getId()/update-client" method="post">
+      <label for="id-client">Select a Client</label>
+      <select id="id-client" name="id-client" type="text">
+        #foreach($client in $stylist.getClients())
+        <option value="$client.getId()">$client.getName()</option>
+        #end
+      </select>
+      <br><br>
+      <label for="newName-client">Update Client Name</label>
+      <br>
+      <input id="newName-client" name="newName-client" type="text">
+      <br>
+      <br>
+      <button type="submit" class="btn btn-default update-client">Update Client</button>
+    </form>
+  </div>
