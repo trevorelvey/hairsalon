@@ -1,0 +1,20 @@
+<h2>Hair Salon</h2>
+
+  <div class="row">
+    <h4>Stylists</h4>
+    <p>Click name for clients.</p>
+      #foreach ($stylist in $stylists)
+      <form action="/delete/stylist/$stylist.getId()" method="post">
+        <a href="/stylists/$stylist.getId()">$stylist.getStylist()</a>
+        <button type="submit" id="$stylist.getId()" name="deleteStylist" class="deleteButton btn btn-default">
+        x</button>
+      </form>
+      #end
+      <br><br>
+      <form action="/" method="post">
+        <label for="stylist">Add a stylist:</label><br>
+        <input id="stylist" type="text" name="stylist">
+        <button id="stylistCreate" type="submit" class="btn btn-default">Add</button>
+      </form>
+    </div>
+  </div>
