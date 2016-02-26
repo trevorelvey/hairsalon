@@ -12,6 +12,11 @@
 
 #### Run webpage with gradle.
 
+#### In PSQL:
+#### CREATE DATABASE to_do;
+#### CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int);
+#### CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);
+
 ## Known Bugs
 
 ##### No bugs known.
