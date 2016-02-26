@@ -33,5 +33,25 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Stylist1");
   }
 
+  @Test
+  public void stylistRemoved() {
+    Stylist myStylist = new Stylist("Stylist1");
+    myStylist.save();
+    goTo("http://localhost:4567/");
+    click("option", withText("Stylist1"));
+    submit(".delete-stylist");
+    assertThat(!(pageSource()).contains("Stylist1"));
+  }
+
+  @Test
+  public void stylistUpdatedSuccessfully() {
+    Stylist myStylist = new Stylist("Stylist1");
+    myStylist.save();
+    goTo("http://localhost:4567/");
+    click("option", withText("Stylist1"));
+    fill("#newName-stylist").with("Stylist2");
+    submit(".update-stylist");
+    assertThat(pageSource()).contains("Stylist2");
+  }
 
 }
