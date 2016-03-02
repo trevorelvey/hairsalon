@@ -13,7 +13,7 @@
 #### Run webpage with gradle.
 
 #### In PSQL:
-#### CREATE DATABASE to_do;
+#### CREATE DATABASE hair_salon;
 #### CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylist_id int);
 #### CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);
 
